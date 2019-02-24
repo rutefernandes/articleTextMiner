@@ -1,6 +1,5 @@
 package pdfbox;
 
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.ByteArrayOutputStream;
@@ -23,6 +22,10 @@ public class TXFontSize extends PDFTextStripper {
         title = new LinkedHashMap<>();
 	}
 	
+	public TXFontSize(String path) throws IOException {
+        this.filePath = path;
+		title = new LinkedHashMap<>();
+	}
 	
 	public boolean getTitleStartFlag() {
 		return this.titleStartFlag;
@@ -68,10 +71,11 @@ public class TXFontSize extends PDFTextStripper {
         	stripper.setEndPage(1); 
             stripper.setSortByPosition(true);
      
-            Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream());
+            // creates a writer that works as a bridge from character streams to byte streams 
+            Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream()); 
             stripper.writeText(document, dummy); // This call starts the parsing process and calls writeString repeatedly.
-            
-            setTitle(((TXFontSize) stripper).getTitle());
+          
+            setTitle(stripper.getTitle());
             toReturn = true;
             
         } finally {
@@ -89,11 +93,9 @@ public class TXFontSize extends PDFTextStripper {
             this.titleStartFlag = true;
             // set string into title map
             title.put(string, textPositions);
-         //   System.out.println(getMapAsString(title));
         } else if (textPositions.get(0).getFontSizeInPt() >= 14.0 && this.titleStartFlag == true) {
             // set string into title map
             title.put(string, textPositions);
-         //   System.out.println(getMapAsString(title));
         } // if string size is less than
         else if (textPositions.get(0).getFontSizeInPt() < 14.0) {
             // mark the end of title
@@ -125,15 +127,13 @@ public class TXFontSize extends PDFTextStripper {
 
    private String getMapAsString(LinkedHashMap<String, List<TextPosition>> map) {
        StringBuffer sb = new StringBuffer();
-
        for (Map.Entry<String, List<TextPosition>> entry : map.entrySet()) {
            String word = entry.getKey();
         //   List<TextPosition> positions = entry.getValue();
-
            sb.append(word);
            sb.append(" ");
        }
-
+       
        return sb.toString().trim();
    }
 	
