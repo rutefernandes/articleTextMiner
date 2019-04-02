@@ -5,12 +5,18 @@ import java.io.PrintWriter;
 
 public class Teste {
     public static void main(String[] args) throws IOException {
-    	TXFontSize tx = new TXFontSize("/home/rute/h.pdf");
-		System.out.println(tx.getTitleAsString());
-		/*
         PrintWriter out = new PrintWriter("/home/rute/dadosbrutos.txt");
-        out.println(pdfManager.ToText());
+    	/*
+    	abstractExtractor tx = new abstractExtractor("/home/rute/AT/6.pdf");
+		System.out.println(tx.getAbstractAsString());
+        out.println(tx.getAbstractAsString());
         out.close();
-        */ 
+        */
+    	TXFontSize ts = new TXFontSize("/home/rute/AT/6.pdf");
+		System.out.println(ts.getTitleAsString());
+        out.println(ts.getTitleAsString());
+        out.close();
+        
+        
 	}	
 }

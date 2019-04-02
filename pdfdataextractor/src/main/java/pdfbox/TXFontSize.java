@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.apache.pdfbox.text.TextPosition;
 public class TXFontSize extends PDFTextStripper {
 	 private String filePath;
 	 private LinkedHashMap<String, List<TextPosition>> title;
+	 public static List<String> words = new ArrayList<String>();
 	 private boolean titleStartFlag = false,
 	            titleEndFlag = false;
 	
@@ -59,7 +61,7 @@ public class TXFontSize extends PDFTextStripper {
         this.title = title;
     }
 	
-    private boolean process() throws IOException {
+    private boolean process() throws IOException { // ADICIONAR PARAMETROS DE PAGINA INICIAL E FINAL
     	PDFManager pdfManager = new PDFManager((this.getFilePath()));
     	TXFontSize stripper = new TXFontSize();
         boolean toReturn = false;
@@ -86,6 +88,18 @@ public class TXFontSize extends PDFTextStripper {
         return toReturn;
     }
 	
+ /*   
+    public void printWords() {
+        for(String word:words){
+        	if(word.equalsIgnoreCase("Keywords")){
+        		System.out.println(word); 
+        	}
+        }
+    }
+    
+   */
+
+
     @Override
     protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
         // if text size is 14 and title not started yet, then mark start of title
@@ -116,10 +130,10 @@ public class TXFontSize extends PDFTextStripper {
   System.out.println(string);
   System.out.println("\n");
         
-       ; */
-        
+       ; 
+      */  
     }
-	
+
    public String getTitleAsString() throws IOException {        
        process();        
        return getMapAsString(this.getTitle());
