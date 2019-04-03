@@ -78,18 +78,16 @@ public class abstractExtractor extends PDFTextStripperByArea {
 
     @Override
     protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
+    //	System.out.println(string +" POSIÇÃO: "+ textPositions.get(0).getYDirAdj() + " FONTE: " + textPositions.get(0).getFontSizeInPt());
+    	System.out.println(textPositions);
     	String[] wordsInStream = string.split(getWordSeparator());
         if(wordsInStream!=null){
             for(String word :wordsInStream){
-                String s = word;
-                String[] parts = s.split("—");
-                String r = parts[0].trim();
-            	if(r.equals("Abstract") || r.equals("ABSTRACT")) {
+            	if(word.contains("Abstract")) {
             		abstractFlag = true;
             	}
             	if(abstractFlag){
-                	if(!word.equalsIgnoreCase("INTRODUCTION") && !word.equals("Keywords") 
-                			&& !word.equalsIgnoreCase("Keywords—")){
+                	if(!word.contains("INTRODUCTION") && !word.contains("Keywords")){
                 		words.add(word);
                 	} else {
                 		abstractFlag = false;

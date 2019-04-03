@@ -13,18 +13,18 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.TextPosition;
 
-public class TXFontSize extends PDFTextStripper {
+public class Title extends PDFTextStripper {
 	 private String filePath;
 	 private LinkedHashMap<String, List<TextPosition>> title;
 	 public static List<String> words = new ArrayList<String>();
 	 private boolean titleStartFlag = false,
 	            titleEndFlag = false;
 	
-	public TXFontSize() throws IOException {
+	public Title() throws IOException {
         title = new LinkedHashMap<>();
 	}
 	
-	public TXFontSize(String path) throws IOException {
+	public Title(String path) throws IOException {
         this.filePath = path;
 		title = new LinkedHashMap<>();
 	}
@@ -63,7 +63,7 @@ public class TXFontSize extends PDFTextStripper {
 	
     private boolean process() throws IOException { // ADICIONAR PARAMETROS DE PAGINA INICIAL E FINAL
     	PDFManager pdfManager = new PDFManager((this.getFilePath()));
-    	TXFontSize stripper = new TXFontSize();
+    	Title stripper = new Title();
         boolean toReturn = false;
         PDDocument document = null;
 
@@ -73,6 +73,10 @@ public class TXFontSize extends PDFTextStripper {
         	stripper.setEndPage(1); 
             stripper.setSortByPosition(true);
      
+            /* TO DO
+            	- ESPECIFICAR AŔEA DO TITULO E SALVAR MAIOR FONTE ENCONTRADA
+            */
+            
             // creates a writer that works as a bridge from character streams to byte streams 
             Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream()); 
             stripper.writeText(document, dummy); // This call starts the parsing process and calls writeString repeatedly.
