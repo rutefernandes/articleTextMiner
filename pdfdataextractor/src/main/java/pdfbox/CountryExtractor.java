@@ -97,10 +97,9 @@ public class CountryExtractor extends PDFTextStripperByArea {
    
    private void getCountryNames() throws ClientProtocolException, IOException {
 	   for(String i:getWords()){
-		   if(CallCountries.CallHTTPGetService(i)) {
-			   System.out.println("pais: " + i);
-			   getCountries().add(i);
-		   }
+		   	if(CallCountries.CallHTTPGetService(i)) {
+		   		getCountries().add(i);
+		   	}
 	   }
    }
 
