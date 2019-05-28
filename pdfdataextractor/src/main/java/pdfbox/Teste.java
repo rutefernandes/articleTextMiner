@@ -6,8 +6,8 @@ import java.io.PrintWriter;
 public class Teste {
     public static void main(String[] args) throws IOException {
     	// GET ABSTRACT
-    	PrintWriter out = new PrintWriter("C:\\Users\\Rute\\Documents\\testesPDFE\\dadosbrutos.txt");
-    	abstractExtractor tx = new abstractExtractor("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
+   // 	PrintWriter out = new PrintWriter("C:\\Users\\Rute\\Documents\\testesPDFE\\dadosbrutos.txt");
+    //	abstractExtractor tx = new abstractExtractor("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
 	//	System.out.println(tx.getAbstractAsString());
 	//	out.println(tx.getAbstractAsString());
 	//	out.close();
@@ -18,10 +18,13 @@ public class Teste {
     	//System.out.println(ts.getTitleAsString());
 
         // GET COUNTRIES 
-    	CountryExtractor ca = new CountryExtractor("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
-    	System.out.print("Países: ");
-		System.out.println(ca.getCountriesAsString());
-        out.close();
+    	//CountryExtractor ca = new CountryExtractor("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
+    //	System.out.print("Países: ");
+	//	System.out.println(ca.getCountriesAsString());
+    //    out.close();
         	
+    	EInterface i = new EInterface();
+    	i.setUrlPath("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
+    	i.getTitle();
     }
 }
