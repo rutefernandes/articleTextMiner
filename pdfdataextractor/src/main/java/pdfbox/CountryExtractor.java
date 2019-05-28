@@ -112,6 +112,4 @@ public class CountryExtractor extends PDFTextStripperByArea {
        }
        return sb.toString().trim();
    }
-	
-	
 }

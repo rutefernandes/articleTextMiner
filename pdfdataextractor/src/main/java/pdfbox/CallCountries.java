@@ -20,7 +20,7 @@ public class CallCountries {
 		    allHttpUriRequest = httpUriRequest;
 		    HttpResponse response = client.execute(allHttpUriRequest);
 		    String json_string = EntityUtils.toString(response.getEntity());
-	        JSONArray  temp1 = new JSONArray(json_string);
+	        JSONArray  temp1 = new JSONArray("[" + json_string + "]");
 	        System.out.println(temp1);
 		}catch(org.json.JSONException e){
 			resposta = false;
