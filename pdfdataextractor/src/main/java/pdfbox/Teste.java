@@ -25,6 +25,6 @@ public class Teste {
         	
     	EInterface i = new EInterface();
     	i.setUrlPath("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
-    	i.getTitle();
+    	i.getReferences();
     }
 }
