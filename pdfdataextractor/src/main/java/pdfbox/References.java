@@ -2,12 +2,18 @@ package pdfbox;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.awt.Rectangle;
 import java.io.ByteArrayOutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.apache.pdfbox.text.TextPosition;
 
@@ -46,22 +52,31 @@ public class References extends PDFTextStripperByArea {
 		References stripper = new References();
 	    boolean toReturn = false;
 	    PDDocument document = null;
-	    //int count =0;
+	    int count =0;
 	
 	   try {
 	   	document = pdfManager.ToText();
-       // count = document.getNumberOfPages();
-    	stripper.setStartPage(1); 
-    	stripper.setEndPage(1); 
+        count = document.getNumberOfPages();
+//    	stripper.setStartPage(1); 
+//    	stripper.setEndPage(count);
 	   	stripper.setSortByPosition(true);
-
-	   // creates a writer that works as a bridge from character streams to byte streams 
-	   Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream()); 
-	   stripper.writeText(document, dummy); // This call starts the parsing process and calls writeString repeatedly.
-       setReferences(stripper.getReferences());
+	   	Rectangle comunist = new Rectangle(0, 50, 298, 842);
+        Rectangle capitalPig = new Rectangle(299, 50, 298, 842);
+        stripper.addRegion("leftColumn", capitalPig);
+        stripper.addRegion("rightColumn", comunist);
+        
+        for (int i = 0; i < count; i++) {
+        	PDPage firstPage = document.getPage(i);
+        	stripper.extractRegions( firstPage );
+            
+        }
+        setReferences(stripper.getReferences());
 	   toReturn = true;
 	       
-	   } finally {
+	   } catch (Exception ex) {
+		   System.out.println(ex);
+		   
+	   }finally {
 	       if (document != null) {
 	           document.close();
 	       }
@@ -69,18 +84,20 @@ public class References extends PDFTextStripperByArea {
 	   return toReturn;
    }
 
+   @Override
    protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
-	   System.out.println("testeeeeeeee");
 	   	//	System.out.println(string +" POSIÇÃO: "+ textPositions.get(0).getYDirAdj() + " FONTE: " + textPositions.get(0).getFontSizeInPt());
 	    //	System.out.println(textPositions);
 	    	String[] wordsInStream = string.split(getWordSeparator());
+	    	Pattern p = Pattern.compile("\\[[0-9]*\\]");
+	    	boolean ff = false;
 	        if(wordsInStream!=null){
 	            for(String word :wordsInStream){
-	          //  	if(word.contains("REFERENCES")) {
+	            	if(word.contains("REFERENCES")) {
 	            		flag = true;
-	          //  	}
+	            	}
 	            	if(flag){
-	            		references.add(word);
+	            		references.add(word.replaceAll("\\[[0-9]*\\]", "\n"));
 	                } else {
                 		flag = false;
 	            	}

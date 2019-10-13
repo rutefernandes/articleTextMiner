@@ -19,12 +19,15 @@ public class Teste {
 
         // GET COUNTRIES 
     	//CountryExtractor ca = new CountryExtractor("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
-    //	System.out.print("Países: ");
+    //	System.out.print("Paï¿½ses: ");
 	//	System.out.println(ca.getCountriesAsString());
     //    out.close();
-        	
+       
     	EInterface i = new EInterface();
-    	i.setUrlPath("C:\\Users\\Rute\\Documents\\testesPDFE\\Gravitational.pdf");
+    	i.setUrlPath("./data/pdf2.pdf");
+    	i.getTitle();
+    	i.getCountry();
+    	i.getAbstract();
     	i.getReferences();
     }
 }
