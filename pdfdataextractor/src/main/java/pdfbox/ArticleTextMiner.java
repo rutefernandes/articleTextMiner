@@ -7,7 +7,7 @@ public class ArticleTextMiner implements IAtm{
 	private CountryMiner countryExtractor;
 	private AbstractMiner abstractExtractor;
 	private TitleMiner title;
-	private References references;
+	private ReferencesMiner references;
 	
 	@Override
 	public void setUrlPath(String path) {
@@ -47,7 +47,7 @@ public class ArticleTextMiner implements IAtm{
 	@Override
 	public void getReferences() throws IOException{
 		System.out.print("References: ");
-		references = new References(getUrlPath());
+		references = new ReferencesMiner(getUrlPath());
 		System.out.println(references.getReferencesAsString());
 	}
 	

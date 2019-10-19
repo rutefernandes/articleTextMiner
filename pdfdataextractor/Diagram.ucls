@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="pdfbox.References" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/References.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="pdfbox.ReferencesMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/pdfbox/ReferencesMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="297" width="227" x="796" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

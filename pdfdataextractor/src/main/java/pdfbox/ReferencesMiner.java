@@ -17,16 +17,16 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.apache.pdfbox.text.TextPosition;
 
-public class References extends PDFTextStripperByArea {
+public class ReferencesMiner extends PDFTextStripperByArea {
 	 private String filePath;
 	 private boolean flag = false;
 	 static List<String> references;
 	 
-	public References() throws IOException {
+	public ReferencesMiner() throws IOException {
 		references = new ArrayList<String>();
 	}
 	
-	public References(String path) throws IOException {
+	public ReferencesMiner(String path) throws IOException {
         this.filePath = path;
         references = new ArrayList<String>();
 	}
@@ -40,16 +40,16 @@ public class References extends PDFTextStripperByArea {
 	}
 	
 	public List<String> getReferences() {
-		return References.references;
+		return ReferencesMiner.references;
 	}
 	
 	public void setReferences(List<String> references) {
-		References.references = references;
+		ReferencesMiner.references = references;
 	}
 	
    private boolean process() throws IOException { // ADICIONAR PARAMETROS DE PAGINA INICIAL E FINAL
 		TextParsing pdfManager = new TextParsing((this.getFilePath()));
-		References stripper = new References();
+		ReferencesMiner stripper = new ReferencesMiner();
 	    boolean toReturn = false;
 	    PDDocument document = null;
 	    int count =0;
