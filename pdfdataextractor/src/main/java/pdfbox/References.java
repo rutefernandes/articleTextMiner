@@ -42,7 +42,7 @@ public class References extends PDFTextStripperByArea {
 	}
 	
    private boolean process() throws IOException { // ADICIONAR PARAMETROS DE PAGINA INICIAL E FINAL
-		PDFManager pdfManager = new PDFManager((this.getFilePath()));
+		TextParsing pdfManager = new TextParsing((this.getFilePath()));
 		References stripper = new References();
 	    boolean toReturn = false;
 	    PDDocument document = null;

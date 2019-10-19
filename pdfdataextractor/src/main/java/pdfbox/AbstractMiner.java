@@ -1,30 +1,28 @@
 package pdfbox;
 
-import java.awt.Rectangle;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.awt.Rectangle;
+import java.io.ByteArrayOutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.ClientProtocolException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.apache.pdfbox.text.TextPosition;
 
-public class CountryExtractor extends PDFTextStripperByArea {
+public class AbstractMiner extends PDFTextStripperByArea {
 	 private String filePath;
-	 private boolean brk = false;
 	 static List<String> words = new ArrayList<String>();
-	 static List<String> countries = new ArrayList<String>();
+	 private boolean abstractFlag = false;
 	
-	public CountryExtractor() throws IOException {
+	public AbstractMiner() throws IOException {
 		words = new ArrayList<String>();
 	}
 	
-	public CountryExtractor(String path) throws IOException {
+	public AbstractMiner(String path) throws IOException {
         this.filePath = path;
         words = new ArrayList<String>();
 	}
@@ -38,11 +36,11 @@ public class CountryExtractor extends PDFTextStripperByArea {
 	}
 	
 	public List<String> getWords() {
-		return CountryExtractor.words;
+		return AbstractMiner.words;
 	}
 	
-	public List<String> getCountries() {
-		return CountryExtractor.countries;
+	public void setWords(List<String> words) {
+		AbstractMiner.words = words;
 	}
 	
 	public void test() throws IOException {
@@ -50,18 +48,20 @@ public class CountryExtractor extends PDFTextStripperByArea {
 	}
 	
     private boolean process() throws IOException { // ADICIONAR PARAMETROS DE PAGINA INICIAL E FINAL
-    	PDFManager pdfManager = new PDFManager((this.getFilePath()));
-    	CountryExtractor stripper = new CountryExtractor();
+    	TextParsing pdfManager = new TextParsing((this.getFilePath()));
+    	AbstractMiner stripper = new AbstractMiner();
         boolean toReturn = false;
         PDDocument document = null;
 
         try {
         	document = pdfManager.ToText();
             stripper.setSortByPosition(true);
-            Rectangle rect = new Rectangle(10, 60, 560, 180);
+            Rectangle rect = new Rectangle(10, 60, 280, 700);
             stripper.addRegion("class1", rect);
         	PDPage firstPage = document.getPage(0);
         	stripper.extractRegions( firstPage );
+            stripper.addRegion("class1", rect);
+           // System.out.println("aa" + stripper.getTextForRegion("class1"));
             
             // creates a writer that works as a bridge from character streams to byte streams 
             Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream()); 
@@ -78,29 +78,29 @@ public class CountryExtractor extends PDFTextStripperByArea {
 
     @Override
     protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
+    //	System.out.println(string +" POSIÇÃO: "+ textPositions.get(0).getYDirAdj() + " FONTE: " + textPositions.get(0).getFontSizeInPt());
+    //	System.out.println(textPositions);
     	String[] wordsInStream = string.split(getWordSeparator());
-	    if(!brk && wordsInStream!=null && textPositions.get(0).getFontSizeInPt() < 14.0) {
-        	for(String word :wordsInStream){
-            	if(word.contains("@") || word.contains(".com")){
-            		brk = true;
+        if(wordsInStream!=null){
+            for(String word :wordsInStream){
+            	if(word.contains("Abstract")) {
+            		abstractFlag = true;
             	}
-            	words.add(word);
-            }  	
-	    }
+            	if(abstractFlag){
+                	if(!word.contains("INTRODUCTION") && !word.contains("Keywords")){
+                		words.add(word);
+                	} else {
+                		abstractFlag = false;
+                	}
+            	}
+
+            }
+        }    	
     }
-    
-   public String getCountriesAsString() throws IOException {        
-       process();
-	   getCountryNames();
-       return getListAsString(getCountries());
-   }
-   
-   private void getCountryNames() throws ClientProtocolException, IOException {
-	   for(String i:getWords()){
-		   	if(CallCountries.CallHTTPGetService(i)) {
-		   		getCountries().add(i);
-		   	}
-	   }
+
+   public String getAbstractAsString() throws IOException {        
+       process();        
+       return getListAsString(this.getWords());
    }
 
    private String getListAsString(List<String> list) {
@@ -111,4 +111,6 @@ public class CountryExtractor extends PDFTextStripperByArea {
        }
        return sb.toString().trim();
    }
+	
 }
+

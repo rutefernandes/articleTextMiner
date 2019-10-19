@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 
-public class keywordsExtractor extends PDFTextStripperByArea {
+public class KeywordsMiner extends PDFTextStripperByArea {
 
-	public keywordsExtractor() throws IOException {
+	public KeywordsMiner() throws IOException {
 		super();
 		// TODO Auto-generated constructor stub
 	} 
