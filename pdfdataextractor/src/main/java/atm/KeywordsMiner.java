@@ -1,4 +1,4 @@
-package pdfbox;
+package atm;
 
 import java.io.IOException;
 
@@ -9,6 +9,6 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 	public KeywordsMiner() throws IOException {
 		super();
 		// TODO Auto-generated constructor stub
-	} 
-	
+	}
+
 }

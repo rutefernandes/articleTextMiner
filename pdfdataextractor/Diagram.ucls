@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <interface id="1" language="java" name="pdfbox.IAtm" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/IAtm.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="1" language="java" name="atm.IArticleTextMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/IArticleTextMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="900" y="129"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="pdfbox.CountryMiner" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/CountryMiner.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="atm.CountryMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/CountryMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="351" width="227" x="529" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="pdfbox.Teste" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/Teste.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="atm.Teste" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/Teste.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="441" y="113"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="pdfbox.ArticleTextMiner" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/ArticleTextMiner.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="atm.ArticleTextMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/ArticleTextMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1097" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="pdfbox.ReferencesMiner" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/ReferencesMiner.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="atm.ReferencesMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/ReferencesMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="297" width="227" x="796" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="pdfbox.TitleMiner" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/TitleMiner.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="atm.TitleMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/TitleMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="405" width="347" x="1063" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="pdfbox.AbstractMiner" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/AbstractMiner.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="atm.AbstractMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/AbstractMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="315" width="227" x="1450" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="pdfbox.TextParsing" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/TextParsing.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="atm.TextParsing" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/TextParsing.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="369" width="180" x="596" y="49"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="pdfbox.KeywordsMiner" project="pdfdataextractor" 
-    file="/pdfdataextractor/src/main/java/pdfbox/KeywordsMiner.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="atm.KeywordsMiner" project="pdfdataextractor" 
+    file="/pdfdataextractor/src/main/java/atm/KeywordsMiner.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="412" y="501"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
