@@ -61,7 +61,6 @@ public class AbstractMiner extends PDFTextStripperByArea {
 			PDPage firstPage = document.getPage(0);
 			stripper.extractRegions(firstPage);
 			stripper.addRegion("class1", rect);
-			// System.out.println("aa" + stripper.getTextForRegion("class1"));
 
 			// creates a writer that works as a bridge from character streams to byte
 			// streams
