@@ -19,7 +19,7 @@ public class TitleMiner extends PDFTextStripperByArea {
 	private String filePath;
 	private LinkedHashMap<String, List<TextPosition>> title;
 	public static List<String> words = new ArrayList<String>();
-	private boolean titleStartFlag = false, titleEndFlag = false;
+	private boolean tittleSrt = false, titleEndFlag = false;
 
 	public TitleMiner() throws IOException {
 		title = new LinkedHashMap<>();
@@ -30,12 +30,12 @@ public class TitleMiner extends PDFTextStripperByArea {
 		title = new LinkedHashMap<>();
 	}
 
-	public boolean getTitleStartFlag() {
-		return this.titleStartFlag;
+	public boolean getTittleSrt() {
+		return this.tittleSrt;
 	}
 
 	public void setTitleStartFlag(boolean titleStartFlag) {
-		this.titleStartFlag = titleStartFlag;
+		this.tittleSrt = titleStartFlag;
 	}
 
 	public boolean getTitleEndFlag() {
@@ -95,22 +95,14 @@ public class TitleMiner extends PDFTextStripperByArea {
 
 	@Override
 	protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
-		if (textPositions.get(0).getFontSizeInPt() >= 14.0 && this.titleStartFlag == false) {
-			this.titleStartFlag = true;
+		if (textPositions.get(0).getFontSizeInPt() >= 14.0 && this.tittleSrt == false) {
+			this.tittleSrt = true;
 			title.put(string, textPositions);
-		} else if (textPositions.get(0).getFontSizeInPt() >= 14.0 && this.titleStartFlag == true) {
+		} else if (textPositions.get(0).getFontSizeInPt() >= 14.0 && this.tittleSrt == true) {
 			title.put(string, textPositions);
 		} else if (textPositions.get(0).getFontSizeInPt() < 14.0) {
-			// mark the end of title
+			this.tittleSrt = false;
 		}
-		/*
-		 * for (TextPosition text : textPositions) { System.out.println(string);
-		 * System.out.println("String[" + text.getXDirAdj() + ", " + text.getYDirAdj() +
-		 * " fs=" + text.getFontSize() + " xscale=" + text.getXScale() + " height=" +
-		 * text.getHeightDir() + " space=" + text.getWidthOfSpace() + " width=" +
-		 * text.getWidthDirAdj() + " font=" + text.getFont().toString() +
-		 * " fontSizeInPT=" + text.getFontSizeInPt() + "]" + text.getUnicode() ) }
-		 */
 	}
 
 	public String getTitleAsString() throws IOException {
@@ -122,7 +114,6 @@ public class TitleMiner extends PDFTextStripperByArea {
 		StringBuffer sb = new StringBuffer();
 		for (Map.Entry<String, List<TextPosition>> entry : map.entrySet()) {
 			String word = entry.getKey();
-			// List<TextPosition> positions = entry.getValue();
 			sb.append(word);
 			sb.append(" ");
 		}

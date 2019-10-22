@@ -102,10 +102,9 @@ public class CountryMiner extends PDFTextStripperByArea {
 		PDDocument document = null;
 
 		try {
-
 			document = pdfManager.ToText();
 			stripper.setSortByPosition(true);
-			Rectangle rect = new Rectangle(10, 60, 560, 220);
+			Rectangle rect = new Rectangle(10, 60, 850, 320);
 			stripper.addRegion("class1", rect);
 			PDPage firstPage = document.getPage(0);
 			stripper.extractRegions(firstPage);
@@ -158,7 +157,6 @@ public class CountryMiner extends PDFTextStripperByArea {
 			if (getAllCountries().contains(i)) {
 				if (!contains(i)) {
 					getCountriesFound().add(i);
-					;
 				}
 			}
 		}
