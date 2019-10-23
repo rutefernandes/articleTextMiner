@@ -9,6 +9,7 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	private AbstractMiner abs;
 	private TitleMiner title;
 	private ReferencesMiner references;
+        private KeywordsMiner keywords;
 
 	public ArticleTextMiner() {
 		
@@ -59,7 +60,15 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	private void setReferences(ReferencesMiner references) {
 		this.references = references;
 	}
-	
+
+	private KeywordsMiner getKeywords(){
+                return keywords;
+        }
+
+        private void setKeywords(KeywordsMiner keywords){
+                this.keywords = keywords;
+        }
+
 	@Override
 	public String Title() throws IOException {
 		setTitle(new TitleMiner(getUrlPath()));
@@ -74,13 +83,14 @@ public class ArticleTextMiner implements IArticleTextMiner {
 
 	@Override
 	public void Keywords() throws IOException { // TO DO
-		//setKeywordsMiner(new Keywor)
+		/* 
+setKeywordsMiner(new Keywor)*/
 	}
 
 	@Override
 	public List<String> Country() throws IOException {
 		setCountry(new CountryMiner(getUrlPath()));
-		return country.getCountriesAsArrayList();
+		return getCountry().getCountriesAsArrayList();
 	}
 	
 	@Override
