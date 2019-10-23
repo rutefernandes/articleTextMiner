@@ -28,35 +28,35 @@ public class ArticleTextMiner implements IArticleTextMiner {
 		return this.path;
 	}
 
-	public CountryMiner getCountry() {
+	private CountryMiner getCountry() {
 		return country;
 	}
 
-	public void setCountry(CountryMiner country) {
+	private void setCountry(CountryMiner country) {
 		this.country = country;
 	}
 
-	public AbstractMiner getAbs() {
+	private AbstractMiner getAbs() {
 		return abs;
 	}
 
-	public void setAbs(AbstractMiner abs) {
+	private void setAbs(AbstractMiner abs) {
 		this.abs = abs;
 	}
 
-	public TitleMiner getTitle() {
+	private TitleMiner getTitle() {
 		return title;
 	}
 
-	public void setTitle(TitleMiner title) {
+	private void setTitle(TitleMiner title) {
 		this.title = title;
 	}
 
-	public ReferencesMiner getReferences() {
+	private ReferencesMiner getReferences() {
 		return references;
 	}
 
-	public void setReferences(ReferencesMiner references) {
+	private void setReferences(ReferencesMiner references) {
 		this.references = references;
 	}
 	
