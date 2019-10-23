@@ -147,7 +147,12 @@ public class CountryMiner extends PDFTextStripperByArea {
 		getCountryNames();
 		return getListAsString(getCountriesFound());
 	}
-
+	
+	public List<String> getCountriesAsArrayList() throws IOException {
+		process();
+		return getCountryNames();
+	}
+	
 	private boolean contains(String item) {
 		for (String i : getCountriesFound()) {
 			if (i.equalsIgnoreCase(item)) {
@@ -157,7 +162,7 @@ public class CountryMiner extends PDFTextStripperByArea {
 		return false;
 	}
 
-	private void getCountryNames() throws ClientProtocolException, IOException {
+	private List<String> getCountryNames() throws ClientProtocolException, IOException {
 		for (String i : getWords()) {
 			if (getAllCountries().contains(i)) {
 				if (!contains(i)) {
@@ -165,6 +170,7 @@ public class CountryMiner extends PDFTextStripperByArea {
 				}
 			}
 		}
+		return getCountriesFound();
 	}
 
 	private String getListAsString(List<String> list) {

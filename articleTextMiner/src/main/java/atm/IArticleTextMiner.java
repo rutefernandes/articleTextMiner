@@ -1,19 +1,20 @@
 package atm;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface IArticleTextMiner {
 	public String getUrlPath();
 
 	public void setUrlPath(String path);
 
-	public String getTitle() throws IOException;
+	public String Title() throws IOException;
 
-	public String getAbstract() throws IOException;
+	public String Abstract() throws IOException;
 
-	public void getKeywords() throws IOException;
+	public void Keywords() throws IOException;
 
-	public void getCountry() throws IOException;
+	public List<String> Country() throws IOException;
 
-	public void getReferences() throws IOException;
+	public void References() throws IOException;
 }
