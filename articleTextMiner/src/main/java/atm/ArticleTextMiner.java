@@ -10,6 +10,14 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	private TitleMiner title;
 	private ReferencesMiner references;
 
+	public ArticleTextMiner() {
+		
+	}
+	
+	public ArticleTextMiner(String path){
+		this.path = path;
+	}
+	
 	@Override
 	public void setUrlPath(String path) {
 		this.path = path;
@@ -52,11 +60,10 @@ public class ArticleTextMiner implements IArticleTextMiner {
 		this.references = references;
 	}
 	
-	
 	@Override
 	public String Title() throws IOException {
 		setTitle(new TitleMiner(getUrlPath()));
-		return getTitle().getTitleAsString();
+		return getTitle().getMapAsString();
 	}
 
 	@Override
@@ -66,7 +73,7 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	}
 
 	@Override
-	public void Keywords() throws IOException {
+	public void Keywords() throws IOException { // TO DO
 		//setKeywordsMiner(new Keywor)
 	}
 

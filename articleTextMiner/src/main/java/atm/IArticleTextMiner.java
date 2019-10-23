@@ -12,9 +12,9 @@ public interface IArticleTextMiner {
 
 	public String Abstract() throws IOException;
 
-	public void Keywords() throws IOException;
+	public void Keywords() throws IOException; //TO DO
 
 	public List<String> Country() throws IOException;
 
-	public void References() throws IOException;
+	public void References() throws IOException; // TO DO
 }

@@ -142,12 +142,6 @@ public class CountryMiner extends PDFTextStripperByArea {
 		}
 	}
 
-	public String getCountriesAsString() throws IOException {
-		process();
-		getCountryNames();
-		return getListAsString(getCountriesFound());
-	}
-	
 	public List<String> getCountriesAsArrayList() throws IOException {
 		process();
 		return getCountryNames();
@@ -180,5 +174,19 @@ public class CountryMiner extends PDFTextStripperByArea {
 			sb.append(" ");
 		}
 		return sb.toString().trim();
+	}
+	
+	public String toString() {
+		try {
+			process();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			getCountryNames();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return getListAsString(getCountriesFound());
 	}
 }

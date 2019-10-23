@@ -30,35 +30,31 @@ public class TitleMiner extends PDFTextStripperByArea {
 		title = new LinkedHashMap<>();
 	}
 
-	public boolean getTittleSrt() {
+	private boolean getTittleSrt() {
 		return this.tittleSrt;
 	}
 
-	public void setTitleStartFlag(boolean titleStartFlag) {
+	private void setTitleStartFlag(boolean titleStartFlag) {
 		this.tittleSrt = titleStartFlag;
 	}
 
-	public boolean getTitleEndFlag() {
+	private boolean getTitleEndFlag() {
 		return this.titleEndFlag;
 	}
 
-	public void setTitleEndFlag(boolean titleEndFlag) {
+	private void setTitleEndFlag(boolean titleEndFlag) {
 		this.titleEndFlag = titleEndFlag;
 	}
 
-	public String getFilePath() {
+	private String getFilePath() {
 		return this.filePath;
 	}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-	public LinkedHashMap<String, List<TextPosition>> getTitle() {
+	private LinkedHashMap<String, List<TextPosition>> getTitle() {
 		return this.title;
 	}
 
-	public void setTitle(LinkedHashMap<String, List<TextPosition>> title) {
+	private void setTitle(LinkedHashMap<String, List<TextPosition>> title) {
 		this.title = title;
 	}
 
@@ -81,7 +77,6 @@ public class TitleMiner extends PDFTextStripperByArea {
 			Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream());
 			stripper.writeText(document, dummy); // This call starts the parsing process and calls writeString
 													// repeatedly.
-
 			setTitle(stripper.getTitle());
 			toReturn = true;
 
@@ -95,21 +90,23 @@ public class TitleMiner extends PDFTextStripperByArea {
 
 	@Override
 	protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
-		if (textPositions.get(0).getFontSizeInPt() >= 14.0 && this.tittleSrt == false) {
-			this.tittleSrt = true;
+		if (textPositions.get(0).getFontSizeInPt() >= 14.0 && !getTittleSrt() && !getTitleEndFlag()) {
+			setTitleStartFlag(true);
 			title.put(string, textPositions);
-		} else if (textPositions.get(0).getFontSizeInPt() >= 14.0 && this.tittleSrt == true) {
+		} else if (textPositions.get(0).getFontSizeInPt() >= 14.0 && getTittleSrt() && !getTitleEndFlag()) {
 			title.put(string, textPositions);
-		} else if (textPositions.get(0).getFontSizeInPt() < 14.0) {
-			this.tittleSrt = false;
+		} else if (textPositions.get(0).getFontSizeInPt() < 14.0 && getTittleSrt() && !getTitleEndFlag()) {
+			setTitleStartFlag(false);
+			setTitleEndFlag(true);
 		}
 	}
 
-	public String getTitleAsString() throws IOException {
+	
+	public String getMapAsString() throws IOException {
 		process();
 		return getMapAsString(this.getTitle());
 	}
-
+	
 	private String getMapAsString(LinkedHashMap<String, List<TextPosition>> map) {
 		StringBuffer sb = new StringBuffer();
 		for (Map.Entry<String, List<TextPosition>> entry : map.entrySet()) {
@@ -117,8 +114,7 @@ public class TitleMiner extends PDFTextStripperByArea {
 			sb.append(word);
 			sb.append(" ");
 		}
-
+		
 		return sb.toString().trim();
 	}
-
 }
