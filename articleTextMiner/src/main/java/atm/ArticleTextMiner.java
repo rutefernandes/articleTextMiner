@@ -82,9 +82,9 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	}
 
 	@Override
-	public void Keywords() throws IOException { // TO DO
-		/* 
-setKeywordsMiner(new Keywor)*/
+	public String Keywords() throws IOException {
+	        setKeywords(new KeywordsMiner(getUrlPath()));
+                return getKeywords().getKeywordsAsString();
 	}
 
 	@Override
