@@ -8,6 +8,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -127,9 +129,12 @@ public class CountryMiner extends PDFTextStripperByArea {
 	@Override
 	protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
 		String[] wordsInStream = string.split(getWordSeparator());
+		Pattern absDash = Pattern.compile("(?i)abstract(\\s?)\\p{Pd}"); 
 		if (!brk && wordsInStream != null && textPositions.get(0).getFontSizeInPt() < 14.0) {
 			for (String word : wordsInStream) {
-				if (word.contains("@") || word.contains(".com")) {
+				Matcher m = absDash.matcher(word);  
+				boolean startPattern = m.lookingAt();
+				if (word.contains("@") || startPattern)  { 
 					brk = true;
 				}
 				words.add(word);

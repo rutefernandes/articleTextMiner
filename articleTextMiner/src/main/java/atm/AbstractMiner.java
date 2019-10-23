@@ -113,24 +113,28 @@ public class AbstractMiner extends PDFTextStripperByArea {
 		/* the pattern bellow verifies if there's a word called "abstract" (either lowercase or uppercase) 
 		 * followed or not by a dash with 0 or 1 spaces between them */
 		Pattern absDash = Pattern.compile("(?i)abstract(\\s?)\\p{Pd}"); 
+		Pattern keyDash = Pattern.compile("(?i)keywords(\\s?)\\p{Pd}");
 		
 		if (wordsInStream != null) {
 			for (String word : wordsInStream) {
 				Matcher m = absDash.matcher(word);  
 				boolean startPattern = m.lookingAt();
 				
+				Matcher n = keyDash.matcher(word);  
+				boolean kPattern = n.lookingAt();
+				
 				if(!isFinalAbsFlag()) {
 					if(startPattern) {
 						setAbstractFlag(true);
 					}
 					
-					if(fontWeight>= 700 || fontName){
+				/*	if(fontWeight>= 700 || fontName){
 						setAbstractFlag(true);
-					}
+					} */
 				}
 				
 				if (isAbstractFlag()) {  
-					if (!word.contains("Keywords")) {
+					if (!kPattern) {
 						words.add(word);
 					} else {
 						setFinalAbsFlag(true);

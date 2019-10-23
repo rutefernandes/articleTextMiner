@@ -20,16 +20,15 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	}
 
 	@Override
-	public void getTitle() throws IOException {
+	public String getTitle() throws IOException {
 		title = new TitleMiner(getUrlPath());
-		System.out.print("Title: ");
-		System.out.println(title.getTitleAsString());
+		return title.getTitleAsString();
 	}
 
 	@Override
-	public void getAbstract() throws IOException {
+	public String getAbstract() throws IOException {
 		abstractExtractor = new AbstractMiner(getUrlPath());
-		System.out.println(abstractExtractor.getAbstractAsString());
+		return abstractExtractor.getAbstractAsString();
 	}
 
 	@Override

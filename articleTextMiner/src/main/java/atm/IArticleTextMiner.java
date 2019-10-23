@@ -7,9 +7,9 @@ public interface IArticleTextMiner {
 
 	public void setUrlPath(String path);
 
-	public void getTitle() throws IOException;
+	public String getTitle() throws IOException;
 
-	public void getAbstract() throws IOException;
+	public String getAbstract() throws IOException;
 
 	public void getKeywords() throws IOException;
 
