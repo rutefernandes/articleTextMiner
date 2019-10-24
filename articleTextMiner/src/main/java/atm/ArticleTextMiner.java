@@ -65,6 +65,12 @@ public class ArticleTextMiner implements IArticleTextMiner {
 		setTitle(new TitleMiner(getUrlPath()));
 		return getTitle().getMapAsString();
 	}
+	
+	@Override
+	public List<String> Country() throws IOException {
+		setCountry(new CountryMiner(getUrlPath()));
+		return country.getCountriesAsArrayList();
+	}
 
 	@Override
 	public String Abstract() throws IOException {
@@ -77,11 +83,7 @@ public class ArticleTextMiner implements IArticleTextMiner {
 		//setKeywordsMiner(new Keywor)
 	}
 
-	@Override
-	public List<String> Country() throws IOException {
-		setCountry(new CountryMiner(getUrlPath()));
-		return country.getCountriesAsArrayList();
-	}
+
 	
 	@Override
 	public void References() throws IOException {

@@ -17,6 +17,13 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.apache.pdfbox.text.TextPosition;
 
+
+/*TO DO
+ * ENCAPSLAR METODOS
+ * 
+ * 
+ * */
+
 public class CountryMiner extends PDFTextStripperByArea {
 	private String filePath;
 	private boolean brk = false;
@@ -133,8 +140,7 @@ public class CountryMiner extends PDFTextStripperByArea {
 		if (!brk && wordsInStream != null && textPositions.get(0).getFontSizeInPt() < 14.0) {
 			for (String word : wordsInStream) {
 				Matcher m = absDash.matcher(word);  
-				boolean startPattern = m.lookingAt();
-				if (word.contains("@") || startPattern)  { 
+				if (word.contains("@") || m.lookingAt())  { 
 					brk = true;
 				}
 				words.add(word);

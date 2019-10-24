@@ -18,7 +18,7 @@ import org.apache.pdfbox.text.TextPosition;
 public class TitleMiner extends PDFTextStripperByArea {
 	private String filePath;
 	private LinkedHashMap<String, List<TextPosition>> title;
-	public static List<String> words = new ArrayList<String>();
+	private static List<String> words = new ArrayList<String>();
 	private boolean tittleSrt = false, titleEndFlag = false;
 
 	public TitleMiner() throws IOException {
