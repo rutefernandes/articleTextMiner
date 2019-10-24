@@ -5,7 +5,6 @@ import java.io.OutputStreamWriter;
 import java.awt.Rectangle;
 import java.io.ByteArrayOutputStream;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.apache.pdfbox.text.TextPosition;
 public class TitleMiner extends PDFTextStripperByArea {
 	private String filePath;
 	private LinkedHashMap<String, List<TextPosition>> title;
-	private static List<String> words = new ArrayList<String>();
 	private boolean tittleSrt = false, titleEndFlag = false;
 
 	public TitleMiner() throws IOException {
@@ -92,9 +90,9 @@ public class TitleMiner extends PDFTextStripperByArea {
 	protected void writeString(String string, List<TextPosition> textPositions) throws IOException {
 		if (textPositions.get(0).getFontSizeInPt() >= 14.0 && !getTittleSrt() && !getTitleEndFlag()) {
 			setTitleStartFlag(true);
-			title.put(string, textPositions);
+			getTitle().put(string, textPositions);
 		} else if (textPositions.get(0).getFontSizeInPt() >= 14.0 && getTittleSrt() && !getTitleEndFlag()) {
-			title.put(string, textPositions);
+			getTitle().put(string, textPositions);
 		} else if (textPositions.get(0).getFontSizeInPt() < 14.0 && getTittleSrt() && !getTitleEndFlag()) {
 			setTitleStartFlag(false);
 			setTitleEndFlag(true);

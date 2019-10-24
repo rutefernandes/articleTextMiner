@@ -121,7 +121,7 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 				boolean kPattern = n.lookingAt();
 				
 				if(!isFinalKeyFlag()) {
-					if(kPattern) {
+					if(kPattern) { //"Index Terms"
 						setKeywordsFlag(true);
 					}
 					
@@ -142,7 +142,7 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 		}
 	}
 
-	public String getAbstractAsString() throws IOException {
+	public String getKeywordsAsString() throws IOException {
 		process();
 		return getListAsString(this.getWords());
 	}

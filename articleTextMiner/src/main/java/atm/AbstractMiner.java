@@ -118,13 +118,10 @@ public class AbstractMiner extends PDFTextStripperByArea {
 		if (wordsInStream != null) {
 			for (String word : wordsInStream) {
 				Matcher m = absDash.matcher(word);  
-				boolean startPattern = m.lookingAt();
-				
 				Matcher n = keyDash.matcher(word);  
-				boolean kPattern = n.lookingAt();
 				
 				if(!isFinalAbsFlag()) {
-					if(startPattern) {
+					if(m.lookingAt()) {
 						setAbstractFlag(true);
 					}
 					
@@ -134,7 +131,7 @@ public class AbstractMiner extends PDFTextStripperByArea {
 				}
 				
 				if (isAbstractFlag()) {  
-					if (!kPattern) {
+					if (!n.lookingAt()) {
 						words.add(word);
 					} else {
 						setFinalAbsFlag(true);

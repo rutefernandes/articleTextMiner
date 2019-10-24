@@ -9,6 +9,7 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	private AbstractMiner abs;
 	private TitleMiner title;
 	private ReferencesMiner references;
+        private KeywordsMiner keywords;
 
 	public ArticleTextMiner() {
 		
@@ -28,38 +29,46 @@ public class ArticleTextMiner implements IArticleTextMiner {
 		return this.path;
 	}
 
-	public CountryMiner getCountry() {
+	private CountryMiner getCountry() {
 		return country;
 	}
 
-	public void setCountry(CountryMiner country) {
+	private void setCountry(CountryMiner country) {
 		this.country = country;
 	}
 
-	public AbstractMiner getAbs() {
+	private AbstractMiner getAbs() {
 		return abs;
 	}
 
-	public void setAbs(AbstractMiner abs) {
+	private void setAbs(AbstractMiner abs) {
 		this.abs = abs;
 	}
 
-	public TitleMiner getTitle() {
+	private TitleMiner getTitle() {
 		return title;
 	}
 
-	public void setTitle(TitleMiner title) {
+	private void setTitle(TitleMiner title) {
 		this.title = title;
 	}
 
-	public ReferencesMiner getReferences() {
+	private ReferencesMiner getReferences() {
 		return references;
 	}
 
-	public void setReferences(ReferencesMiner references) {
+	private void setReferences(ReferencesMiner references) {
 		this.references = references;
 	}
+
+	private KeywordsMiner getKeywords(){
+        return keywords;
+    }
 	
+	private void setKeywords(KeywordsMiner keywords) {
+		this.keywords = keywords;
+	}
+
 	@Override
 	public String Title() throws IOException {
 		setTitle(new TitleMiner(getUrlPath()));
@@ -69,7 +78,7 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	@Override
 	public List<String> Country() throws IOException {
 		setCountry(new CountryMiner(getUrlPath()));
-		return country.getCountriesAsArrayList();
+		return getCountry().getCountriesAsArrayList();
 	}
 
 	@Override
@@ -79,17 +88,15 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	}
 
 	@Override
-	public void Keywords() throws IOException { // TO DO
-		//setKeywordsMiner(new Keywor)
+	public String Keywords() throws IOException {
+	     setKeywords(new KeywordsMiner(getUrlPath()));
+         return getKeywords().getKeywordsAsString();
 	}
 
-
-	
 	@Override
 	public void References() throws IOException {
 		setReferences(new ReferencesMiner(getUrlPath()));
-		references = new ReferencesMiner(getUrlPath());
-		System.out.println(references.getReferencesAsString());
+		System.out.println(getReferences().getReferencesAsString());
 	}
 
 }

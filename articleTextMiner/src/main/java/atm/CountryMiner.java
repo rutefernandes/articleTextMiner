@@ -17,19 +17,12 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.apache.pdfbox.text.TextPosition;
 
-
-/*TO DO
- * ENCAPSLAR METODOS
- * 
- * 
- * */
-
 public class CountryMiner extends PDFTextStripperByArea {
 	private String filePath;
 	private boolean brk = false;
-	static List<String> words = new ArrayList<String>();
-	static List<String> countriesFound = new ArrayList<String>();
-	static ArrayList<String> allCountries = new ArrayList<String>(Arrays.asList("Afghanistan", "Aland Islands",
+	private static List<String> words = new ArrayList<String>();
+	private static List<String> countriesFound = new ArrayList<String>();
+	private static ArrayList<String> allCountries = new ArrayList<String>(Arrays.asList("Afghanistan", "Aland Islands",
 			"Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua",
 			"Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
 			"Barbados", "Barbuda", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia",
@@ -84,24 +77,16 @@ public class CountryMiner extends PDFTextStripperByArea {
 		this.filePath = filePath;
 	}
 
-	public List<String> getWords() {
+	private List<String> getWords() {
 		return CountryMiner.words;
 	}
 
-	public List<String> getCountriesFound() {
+	private List<String> getCountriesFound() {
 		return CountryMiner.countriesFound;
 	}
 
-	public static ArrayList<String> getAllCountries() {
+	private static ArrayList<String> getAllCountries() {
 		return allCountries;
-	}
-
-	public static void setAllCountries(ArrayList<String> allCountries) {
-		CountryMiner.allCountries = allCountries;
-	}
-
-	public void test() throws IOException {
-		process();
 	}
 
 	private boolean process() throws IOException {
