@@ -19,7 +19,8 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 	static List<String> words = new ArrayList<String>();
 	private boolean keywordsFlag = false;
 	private boolean finalKeyFlag = false;
-
+	static private String teste = null; 
+	
 	public KeywordsMiner() throws IOException {
 		words = new ArrayList<String>();
 	}
@@ -38,27 +39,27 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 	}
 
 	public List<String> getWords() {
-		return AbstractMiner.words;
+		return KeywordsMiner.words;
 	}
 
 	public void setWords(List<String> words) {
-		AbstractMiner.words = words;
+		KeywordsMiner.words = words;
 	}
 	
 	public boolean isKeywordsFlag() {
 		return keywordsFlag;
 	}
 
-	public void setKeywordsFlag(boolean abstractFlag) {
-		this.keywordsFlag = abstractFlag;
+	public void setKeywordsFlag(boolean keywordsFlag) {
+		this.keywordsFlag = keywordsFlag;
 	}
 
 	public boolean isFinalKeyFlag() {
 		return finalKeyFlag;
 	}
 
-	public void setFinalAbsFlag(boolean finalAbsFlag) {
-		this.finalKeyFlag = finalAbsFlag;
+	public void setFinalKeywordsFlag(boolean finalKeyFlag) {
+		this.finalKeyFlag = finalKeyFlag;
 	}
 
 	public void test() throws IOException {
@@ -67,7 +68,7 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 
 	private boolean process() throws IOException { 
 		TextParsing pdfManager = new TextParsing((this.getFilePath()));
-		AbstractMiner stripper = new AbstractMiner();
+		KeywordsMiner stripper = new KeywordsMiner();
 		boolean toReturn = false;
 		PDDocument document = null;
 
@@ -80,11 +81,10 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 			stripper.extractRegions(firstPage);
 			stripper.addRegion("class1", rect);
 
-			// creates a writer that works as a bridge from character streams to byte
-			// streams
+			// creates a writer that works as a bridge from character streams to byte streams
 			Writer dummy = new OutputStreamWriter(new ByteArrayOutputStream());
-			stripper.writeText(document, dummy); // This call starts the parsing process and calls writeString
-													// repeatedly.
+			// This call starts the parsing process and calls writeString repeatedly.
+			stripper.writeText(document, dummy); 
 			toReturn = true;
 
 		} finally {
@@ -106,22 +106,24 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 		
 		/* getting font weight (from bold is expected a value >= 700) */
 		float fontWeight = textPositions.get(0).getFont().getFontDescriptor().getFontWeight(); 
-		
 		/* checking if the font name has the word "bold" in it */
 		boolean fontName = textPositions.get(0).getFont().getName().toLowerCase().contains("bold"); 
 		
 		/* the pattern bellow verifies if there's a word called "abstract" (either lowercase or uppercase) 
 		 * followed or not by a dash with 0 or 1 spaces between them */
-		Pattern absDash = Pattern.compile("(?i)abstract(\\s?)\\p{Pd}"); 
 		Pattern keyDash = Pattern.compile("(?i)keywords(\\s?)\\p{Pd}");
+		Pattern indexDash = Pattern.compile("(?i)Terms(\\s?)\\p{Pd}");
+		Pattern introduction = Pattern.compile("I.|1."); 
+		String a = "null", b = "null", c = "null";
 		
 		if (wordsInStream != null) {
 			for (String word : wordsInStream) {
-				Matcher n = keyDash.matcher(word);  
-				boolean kPattern = n.lookingAt();
-				
+				Matcher m = keyDash.matcher(word);  
+				Matcher n = indexDash.matcher(word);
+				teste = word;
+				Matcher o = introduction.matcher(teste);
 				if(!isFinalKeyFlag()) {
-					if(kPattern) { //"Index Terms"
+					if(m.lookingAt() || n.lookingAt()) {
 						setKeywordsFlag(true);
 					}
 					
@@ -130,14 +132,18 @@ public class KeywordsMiner extends PDFTextStripperByArea {
 					} */
 				}
 				
-				if (isKeywordsFlag()) {  
-					if (!kPattern) {
-						words.add(word);
-					} else {
-						setFinalAbsFlag(true);
-					//	setAbstractFlag(false);
+				if (isKeywordsFlag()) {
+					System.out.println(o.lookingAt());
+					if(o.lookingAt()) {
+						if (word.equalsIgnoreCase("introduction")) {
+							words.add(word);
+						} else {
+							setFinalKeywordsFlag(true);
+							setKeywordsFlag(false);
+						}
 					}
 				}
+				b = word;
 			}
 		}
 	}

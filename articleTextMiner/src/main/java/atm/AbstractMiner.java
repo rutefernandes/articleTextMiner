@@ -114,11 +114,13 @@ public class AbstractMiner extends PDFTextStripperByArea {
 		 * followed or not by a dash with 0 or 1 spaces between them */
 		Pattern absDash = Pattern.compile("(?i)abstract(\\s?)\\p{Pd}"); 
 		Pattern keyDash = Pattern.compile("(?i)keywords(\\s?)\\p{Pd}");
+		Pattern indexDash = Pattern.compile("(?i)Terms(\\s?)\\p{Pd}");
 		
 		if (wordsInStream != null) {
 			for (String word : wordsInStream) {
 				Matcher m = absDash.matcher(word);  
 				Matcher n = keyDash.matcher(word);  
+				Matcher o = indexDash.matcher(word);  
 				
 				if(!isFinalAbsFlag()) {
 					if(m.lookingAt()) {
@@ -131,7 +133,7 @@ public class AbstractMiner extends PDFTextStripperByArea {
 				}
 				
 				if (isAbstractFlag()) {  
-					if (!n.lookingAt()) {
+					if (!n.lookingAt() && !o.lookingAt()) {
 						words.add(word);
 					} else {
 						setFinalAbsFlag(true);
