@@ -94,9 +94,9 @@ public class ArticleTextMiner implements IArticleTextMiner {
 	}
 
 	@Override
-	public void References() throws IOException {
+	public String References() throws IOException {
 		setReferences(new ReferencesMiner(getUrlPath()));
-		System.out.println(getReferences().getReferencesAsString());
+		return getReferences().getReferencesAsString();
 	}
 
 }

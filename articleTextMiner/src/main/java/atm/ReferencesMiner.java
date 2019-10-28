@@ -90,19 +90,29 @@ public class ReferencesMiner extends PDFTextStripperByArea {
 		// + " FONTE: " + textPositions.get(0).getFontSizeInPt());
 		// System.out.println(textPositions);
 		String[] wordsInStream = string.split(getWordSeparator());
+		/* getting font weight (from bold is expected a value >= 700) */
+		int sz = textPositions.size();
+		float fontWeight = textPositions.get(sz - 1).getFont().getFontDescriptor().getFontWeight(); 
+		
+		/* checking if the font name has the word "bold" in it */
+		boolean fontName = textPositions.get(sz - 1).getFont().getName().toLowerCase().contains("bold");
+		
 		Pattern p = Pattern.compile("\\[[0-9]*\\]");
-		boolean ff = false;
-		if (wordsInStream != null) {
-			for (String word : wordsInStream) {
-				if (word.contains("REFERENCES")) {
-					flag = true;
-				}
-				if (flag) {
-					references.add(word.replaceAll("\\[[0-9]*\\]", "\n"));
-				} else {
-					flag = false;
-				}
+		
+		Pattern refDash = Pattern.compile("(([0-9]*)|^)(\\s?)*(?i)references(\\s?)*($|\\R)");
+		
+		Matcher m = refDash.matcher(string);
+		
+		if (m.find()/* && (fontWeight > 500 || fontName)*/) {
+			flag = true;
+			references = new ArrayList<String>();
+		}
 
+		if (flag) {
+			if (wordsInStream != null) {
+				for (String word : wordsInStream) {
+						references.add(word.replaceAll("\\[[0-9]*\\]", "\n"));
+				}
 			}
 		}
 	}

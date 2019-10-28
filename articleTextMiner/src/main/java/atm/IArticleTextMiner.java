@@ -16,5 +16,5 @@ public interface IArticleTextMiner {
 
 	public List<String> Country() throws IOException;
 
-	public void References() throws IOException; // TO DO
+	public String References() throws IOException; // TO DO
 }
